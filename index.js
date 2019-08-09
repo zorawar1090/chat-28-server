@@ -7,6 +7,8 @@ const Sequelize = require('sequelize')
 const databaseUrl = process.env.DATABASE_URL || 
 'postgres://postgres:advertisements@localhost:5432/postgres'
 
+console.log('databaseUrl test:', databaseUrl)
+
 const db = new Sequelize(databaseUrl)
 
 db.sync({force: false})

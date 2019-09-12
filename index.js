@@ -9,7 +9,7 @@ const databaseUrl = process.env.DATABASE_URL ||
 
 const db = new Sequelize(databaseUrl)
 
-db.sync({force: false})
+db.sync({force: true})
   .then(() => console.log('Database synced'))
 
 const Message = db.define(

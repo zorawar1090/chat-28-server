@@ -56,7 +56,9 @@ app.post('/message', async (req, res) => {
     channelId
   })
 
-  const channels = await Channel.findAll()
+  const channels = await Channel.findAll({
+    include: [Message]
+  })
 
   const data = JSON.stringify(channels)
 

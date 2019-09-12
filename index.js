@@ -65,6 +65,24 @@ app.post('/message', async (req, res) => {
   res.send(entity)
 })
 
+app.post(
+  '/channel',
+  async (request, response) => {
+    const channel = await Channel.create(request.body)
+
+    const channels = await Channel.findAll({
+      include: [Message]
+    })
+
+    const data = JSON.stringify(channels)
+
+    stream.updateInit(data)
+    stream.send(data)
+
+    response.send(channel)
+  }
+)
+
 const port = process.env.PORT || 5000
 
 app.listen(port, () => console.log(`Listening on port ${port}`))

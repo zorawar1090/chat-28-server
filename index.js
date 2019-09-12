@@ -27,6 +27,9 @@ const Channel = db.define(
   }
 )
 
+Message.belongsTo(Channel)
+Channel.hasMany(Message)
+
 const stream = new Sse()
 
 const app = express()

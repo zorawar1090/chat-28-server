@@ -7,8 +7,6 @@ const Sequelize = require('sequelize')
 const databaseUrl = process.env.DATABASE_URL || 
 'postgres://postgres:advertisements@localhost:5432/postgres'
 
-console.log('databaseUrl test:', databaseUrl)
-
 const db = new Sequelize(databaseUrl)
 
 db.sync({force: false})
@@ -19,6 +17,13 @@ const Message = db.define(
   {
     text: Sequelize.STRING,
     user: Sequelize.STRING
+  }
+)
+
+const Channel = db.define(
+  'channel',
+  {
+    name: Sequelize.STRING
   }
 )
 

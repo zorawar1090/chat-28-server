@@ -40,5 +40,5 @@ Individual project - Chat app server built with node, express, sequelize, server
 
 ```bash
 > npm start
-
+```
 -   That's all, enjoy!

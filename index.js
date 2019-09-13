@@ -4,12 +4,12 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const Sequelize = require('sequelize')
 
-const databaseUrl = process.env.DATABASE_URL || 
-'postgres://postgres:advertisements@localhost:5432/postgres'
+const databaseUrl = process.env.DATABASE_URL ||
+  'postgres://postgres:advertisements@localhost:5432/postgres'
 
 const db = new Sequelize(databaseUrl)
 
-db.sync({force: false})
+db.sync({ force: false })
   .then(() => console.log('Database synced'))
 
 const Message = db.define(
@@ -40,16 +40,16 @@ app.use(corsMiddleware)
 const jsonParser = bodyParser.json()
 app.use(jsonParser)
 
-app.get('/stream', async (req,res ) => {
-  const channels = await Channel.findAll({include: [Message]})
+app.get('/stream', async (req, res) => {
+  const channels = await Channel.findAll({ include: [Message] })
   const data = JSON.stringify(channels)
   stream.updateInit(data)
-  stream.init(req,res)
+  stream.init(req, res)
 })
 
 app.post('/message', async (req, res) => {
   const { message, user, channelId } = req.body
-  
+
   const entity = await Message.create({
     text: message,
     user,
